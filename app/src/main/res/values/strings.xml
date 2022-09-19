@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ProyectoAS</string>
+    <string name="login">Login</string>
+    <string name="bienvenido">¡Bienvenido!</string>
+    <string name="register">Register</string>
+    <string name="nombre">Nombre</string>
+    <string name="correo">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="turismo_de_guate">turismo de guate</string>
+    <string name="ingrdatos">Ingrese sus datos</string>
+    <string name="apellido">Apellido</string>
+    <string name="nacionalidad">Nacionalidad</string>
+    <string name="telefono">telefono</string>
 </resources>
