@@ -58,17 +58,6 @@
             </RelativeLayout>
 
             <EditText
-                android:id="@+id/nombrelogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:ems="10"
-                android:hint="@string/nombre"
-                android:inputType="textPersonName"
-                android:autofillHints="" />
-
-            <EditText
                 android:id="@+id/correologin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,11 +76,11 @@
                 android:layout_marginEnd="10dp"
                 android:ems="10"
                 android:hint="@string/password"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:autofillHints="" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buttonlog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
