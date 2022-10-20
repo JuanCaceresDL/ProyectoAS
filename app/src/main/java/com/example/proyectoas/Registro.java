@@ -32,7 +32,7 @@ public class Registro extends AppCompatActivity {
     Button b_insertar;
     String snombre,sapellido,scorreo, snacionalidad,stelefono,spassword,url;
     @Override
-    protected void onCreoate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
@@ -58,12 +58,20 @@ public class Registro extends AppCompatActivity {
                    snacionalidad = t_nacionalidad.getText().toString();
                    stelefono = t_telefono.getText().toString();
                    spassword = t_password.getText().toString();
-                   url = "http://192.168.178.150/android/save.php";
+                   url = "http://192.168.1.36/android/save.php";
                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                            new Response.Listener<String>() {
                                @Override
                                public void onResponse(String response) {
-                                   Toast.makeText(Registro.this, response.trim(), Toast.LENGTH_SHORT).show();
+                                   if (response.equals("El usuario fue creado exitosamente")) {
+                                       Toast.makeText(Registro.this, response.trim(), Toast.LENGTH_SHORT).show();
+                                       Intent intent_log = new Intent(getApplicationContext(),Login.class);
+                                       startActivity(intent_log);
+                                   }
+                                   else{
+                                       Toast.makeText(Registro.this, "Correo existente, ingresar otro", Toast.LENGTH_SHORT).show();
+                                   }
+
                                }
                            },
                            new Response.ErrorListener() {
@@ -87,8 +95,7 @@ public class Registro extends AppCompatActivity {
                    };
                 RequestQueue requestQueue = Volley.newRequestQueue(Registro.this);
                 requestQueue.add(stringRequest);
-                   Intent intent_log = new Intent(getApplicationContext(),Login.class);
-                   startActivity(intent_log);
+
                }
             }
         });

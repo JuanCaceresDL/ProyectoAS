@@ -18,12 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/res_image"
         android:layout_marginStart="20dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Los juegos del hambre"/>
+        android:text="Nombre"/>
 
     <TextView
         android:id="@+id/res_departamento"
@@ -31,9 +30,22 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/res_name"
         app:layout_constraintStart_toEndOf="@id/res_image"
-        android:text="J.K. Rowling"
+        android:text="departamento"
         android:textSize="16sp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/res_image"
+        app:layout_constraintTop_toBottomOf="@id/res_departamento" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
