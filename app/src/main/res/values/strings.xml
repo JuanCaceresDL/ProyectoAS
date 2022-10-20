@@ -11,4 +11,7 @@
     <string name="apellido">Apellido</string>
     <string name="nacionalidad">Nacionalidad</string>
     <string name="telefono">telefono</string>
+    <string name="texto_aleatorio">texto aleatorio</string>
+    <string name="imagenturistico">imagenturistico</string>
+    <string name="imagenrestaurantistico">imagenrestaurantistico</string>
 </resources>
