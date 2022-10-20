@@ -17,9 +17,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31" >
         <activity
-            android:name=".resAdapter"
-            android:exported="false" />
-        <activity
             android:name=".RestActivity"
             android:exported="false" />
         <activity
@@ -27,6 +24,10 @@
             android:exported="false" />
         <activity
             android:name=".TuristicoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".RestaurantActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
