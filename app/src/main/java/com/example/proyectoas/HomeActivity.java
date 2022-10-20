@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -26,11 +27,16 @@ public class HomeActivity extends AppCompatActivity {
     private List<turistico> mTuristico;
     private TurAPI mApi;
 
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF_NAME = "user";
+    private static final String KEY_EMAIL = "email";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mApi = ApiClient.getInstance().create(TurAPI.class);
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        String slcorreo = sharedPreferences.getString(KEY_EMAIL,null);
 
         RecyclerView rvTur = (RecyclerView) findViewById(R.id.tur_list);
         // Create adapter passing in the sample user data
@@ -39,13 +45,13 @@ public class HomeActivity extends AppCompatActivity {
         rvTur.setAdapter(adapter);
         // Set layout manager to position the items
         rvTur.setLayoutManager(new LinearLayoutManager(this));
-
         Call<List<turistico>> bookCall = mApi.getTur();
         bookCall.enqueue(new Callback<List<turistico>>() {
             @Override
             public void onResponse(Call<List<turistico>> call, Response<List<turistico>> response) {
                 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 System.out.println(response);
+                System.out.println(slcorreo);
                 adapter.reloadData(response.body());
             }
 
