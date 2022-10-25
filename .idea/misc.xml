@@ -3,15 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_baseline_drive_eta_24.xml" value="0.2525" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.2525" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_red_favorite_24.xml" value="0.2525" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_shadow_favorite_24.xml" value="0.2525" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_registro.xml" value="0.176" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_res_adapter.xml" value="0.1" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_rest.xml" value="0.2" />
-        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_turistico.xml" value="0.11302083333333333" />
-        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/res_adapter.xml" value="0.1" />
-        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/tur_adapter.xml" value="0.11302083333333333" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_restaurant.xml" value="0.176" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_turistico.xml" value="0.20963541666666666" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/des_adapter.xml" value="0.18541666666666667" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/res_adapter.xml" value="0.264" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/tur_adapter.xml" value="0.16799999999999998" />
       </map>
     </option>
   </component>

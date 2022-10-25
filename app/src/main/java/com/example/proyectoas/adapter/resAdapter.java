@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.proyectoas.R;
 import com.example.proyectoas.RestActivity;
+import com.example.proyectoas.RestaurantActivity;
 import com.example.proyectoas.TuristicoActivity;
 import com.example.proyectoas.modelos.restau;
 import com.example.proyectoas.modelos.turistico;
@@ -59,7 +61,10 @@ public class resAdapter extends RecyclerView.Adapter<resAdapter.ViewHolder> {
         bookNameTextView.setText(restau.rNombre);
         TextView bookAuthorTextView = holder.rResDepartamento;
         bookAuthorTextView.setText(restau.rDepartamento);
+        RatingBar resRatingRatingBar = holder.rCalificacion;
+        resRatingRatingBar.setRating(restau.rCalificacion);
         ImageView bookImage = holder.rResImagen;
+        holder.rId = restau.rId;
 
         Glide.with(this.context).load(restau.rImagen).into(bookImage);
     }
@@ -74,6 +79,8 @@ public class resAdapter extends RecyclerView.Adapter<resAdapter.ViewHolder> {
         private ImageView rResImagen;
         private TextView rResNombre;
         private TextView rResDepartamento;
+        private RatingBar rCalificacion;
+        public Integer rId;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,12 +88,14 @@ public class resAdapter extends RecyclerView.Adapter<resAdapter.ViewHolder> {
             rResImagen = (ImageView) itemView.findViewById(R.id.res_image);
             rResNombre = (TextView) itemView.findViewById(R.id.res_name);
             rResDepartamento = (TextView) itemView.findViewById(R.id.res_departamento);
+            rCalificacion = (RatingBar) itemView.findViewById(R.id.ratingBar);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), RestActivity.class);
+            Intent intent = new Intent(view.getContext(), RestaurantActivity.class);
+            intent.putExtra("idres", rId);
             view.getContext().startActivity(intent);
         }
     }
