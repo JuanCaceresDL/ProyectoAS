@@ -32,7 +32,7 @@ public class Registro extends AppCompatActivity {
     Button b_insertar;
     String snombre,sapellido,scorreo, snacionalidad,stelefono,spassword,url;
     @Override
-    protected void onCreoate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
