@@ -14,4 +14,7 @@
     <string name="texto_aleatorio">texto aleatorio</string>
     <string name="imagenturistico">imagenturistico</string>
     <string name="imagenrestaurantistico">imagenrestaurantistico</string>
+    <string name="lugares_tur_sticos">Lugares turísticos</string>
+    <string name="restaurantes">Restaurantes</string>
+    <string name="imagenrestaurantes">imagenrestaurantes</string>
 </resources>
