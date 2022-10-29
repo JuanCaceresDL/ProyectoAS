@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Turistico"
+        android:icon="@drawable/ic_baseline_place_24"
+        android:id="@+id/turistico"/>
+    <item android:title="Restaurantes"
+        android:icon="@drawable/ic_baseline_restaurant_24"
+        android:id="@+id/restaurante"/>
+    <item android:title="Favoritos"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:id="@+id/favoritos"/>
+    <item android:title="Cerca"
+        android:icon="@drawable/ic_baseline_gps_fixed_24"
+        android:id="@+id/cerca"/>
+    <item android:title="Perfil"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:id="@+id/perfil"/>
+</menu>

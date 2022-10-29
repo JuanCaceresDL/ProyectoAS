@@ -1,69 +1,59 @@
 package com.example.proyectoas;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
-import com.example.proyectoas.API.ApiClient;
-import com.example.proyectoas.API.TurAPI;
-import com.example.proyectoas.adapter.turAdapter;
-import com.example.proyectoas.modelos.turistico;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.example.proyectoas.Fragments.CloseFragment;
+import com.example.proyectoas.Fragments.FavoriteFragment;
+import com.example.proyectoas.Fragments.ProfileFragment;
+import com.example.proyectoas.Fragments.RestauFragment;
+import com.example.proyectoas.Fragments.TuristFragment;
+import com.example.proyectoas.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private List<turistico> mTuristico;
-    private TurAPI mApi;
+    ActivityHomeBinding binding;
 
-    SharedPreferences sharedPreferences;
-    private static final String SHARED_PREF_NAME = "user";
-    private static final String KEY_EMAIL = "email";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        mApi = ApiClient.getInstance().create(TurAPI.class);
-        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-        String slcorreo = sharedPreferences.getString(KEY_EMAIL,null);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        RecyclerView rvTur = (RecyclerView) findViewById(R.id.tur_list);
-        // Create adapter passing in the sample user data
-        turAdapter adapter = new turAdapter(new ArrayList<>());
-        // Attach the adapter to the recyclerview to populate items
-        rvTur.setAdapter(adapter);
-        // Set layout manager to position the items
-        rvTur.setLayoutManager(new LinearLayoutManager(this));
-        Call<List<turistico>> bookCall = mApi.getTur();
-        bookCall.enqueue(new Callback<List<turistico>>() {
-            @Override
-            public void onResponse(Call<List<turistico>> call, Response<List<turistico>> response) {
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                System.out.println(response);
-                System.out.println(slcorreo);
-                adapter.reloadData(response.body());
+        replaceFragment(new TuristFragment());
+
+        binding.bottomnav.setOnItemSelectedListener(item -> {
+
+            switch (item.getItemId()){
+                case R.id.turistico:
+                    replaceFragment(new TuristFragment());
+                    break;
+                case R.id.restaurante:
+                    replaceFragment(new RestauFragment());
+                    break;
+                case R.id.favoritos:
+                    replaceFragment(new FavoriteFragment());
+                    break;
+                case R.id.cerca:
+                    replaceFragment(new CloseFragment());
+                    break;
+                case R.id.perfil:
+                    replaceFragment(new ProfileFragment());
+                    break;
             }
 
-            @Override
-            public void onFailure(Call<List<turistico>> call, Throwable t) {
-                System.out.println(t.toString());
-                Toast.makeText(HomeActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
-            }
+            return true;
         });
     }
-    public  void restaurantes(View view){
-        startActivity(new Intent(getApplicationContext(),RestActivity.class));
-        finish();
+
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.layouthome, fragment);
+        fragmentTransaction.commit();
     }
 }

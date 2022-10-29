@@ -3,6 +3,7 @@ package com.example.proyectoas;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,66 +27,73 @@ public class Login extends AppCompatActivity {
 
     EditText l_correo, l_password;
     Button b_logear;
-    String slcorreo, slpassword, url;
-    SharedPreferences sharedPreferences;
+    String slcorreo, slpassword,sId , url;
 
-    private static final String SHARED_PREF_NAME = "user";
-    private static final String KEY_EMAIL = "email";
+    private static final String KEY_ID = "id";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         l_correo = findViewById(R.id.correologin);
         l_password= findViewById(R.id.contraseñalogin);
         b_logear=findViewById(R.id.buttonlog);
-
-        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-        slcorreo = sharedPreferences.getString(KEY_EMAIL,null);
-
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences("estado", Context.MODE_PRIVATE);
+        sId = sharedPreferences.getString(KEY_ID,null);
+        if (sId != null) {
+            Intent intent_home = new Intent(getApplicationContext(),HomeActivity.class);
+            startActivity(intent_home);
+        }
         b_logear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(l_correo.getText().toString().matches("") || l_password.getText().toString().matches("") ) {
                     Toast.makeText(Login.this, "Llenar los campos", Toast.LENGTH_SHORT).show();
                 }else{
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     slcorreo=l_correo.getText().toString();
                     slpassword=l_password.getText().toString();
-                    editor.putString(KEY_EMAIL,slcorreo);
-                    editor.apply();
-                url="http://192.168.1.36/android/login.php";
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if (response.equals("Bienvenido!")){
-                            Toast.makeText(Login.this, response.trim(), Toast.LENGTH_SHORT).show();
-                            Intent intent_home = new Intent(getApplicationContext(),HomeActivity.class);
-                            startActivity(intent_home);
+                    url="http://192.168.56.1/android/proy2/login.php";
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (!response.equals("-1")){
+                                SharedPreferences sharedPreferences;
+                                sharedPreferences = getSharedPreferences("estado", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString(KEY_ID, response);
+                                editor.apply();
+                                Toast.makeText(Login.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                                Intent intent_home = new Intent(getApplicationContext(),HomeActivity.class);
+                                startActivity(intent_home);
+                            }
+                            else{
+                                SharedPreferences sharedPreferences;
+                                sharedPreferences = getSharedPreferences("estado", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString(KEY_ID, null);
+                                editor.apply();
+                                Toast.makeText(Login.this, "Algo falló", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else{
-                            Toast.makeText(Login.this, response.trim(), Toast.LENGTH_SHORT).show();
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(Login.this,error.toString(),Toast.LENGTH_SHORT).show();
                         }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Login.this,error.toString(),Toast.LENGTH_SHORT).show();
-                    }
-                }){
-                    @Nullable
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String,String> params = new HashMap<String, String>();
-                        params.put("correo",slcorreo);
-                        params.put("contraseña",slpassword);
-                        return params;
-                    }
-                };
-                RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
-                requestQueue.add(stringRequest);
-            }
-        }});
+                    }){
+                        @Nullable
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String,String> params = new HashMap<String, String>();
+                            params.put("correo",slcorreo);
+                            params.put("contraseña",slpassword);
+                            return params;
+                        }
+                    };
+                    RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
+                    requestQueue.add(stringRequest);
+                }
+            }});
     }
 
     public  void registro(View view){
