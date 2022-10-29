@@ -46,57 +46,59 @@ public class Registro extends AppCompatActivity {
         AwesomeValidation mAwesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         mAwesomeValidation.addValidation(t_passwordconf,t_password, "las contraseñas no son iguales");
 
-        b_insertar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mAwesomeValidation.validate()){
-                    snombre = t_nombre.getText().toString();
-                    sapellido = t_apellido.getText().toString();
-                    scorreo = t_correo.getText().toString();
-                    snacionalidad = t_nacionalidad.getSelectedCountryEnglishName();
-                    stelefono = t_telefono.getText().toString();
-                    spassword = t_password.getText().toString();
-                    url = "http://192.168.56.1/android/proy2/save.php";
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    if (response.equals("El usuario fue creado exitosamente")) {
-                                        Toast.makeText(Registro.this, response.trim(), Toast.LENGTH_SHORT).show();
-                                        Intent intent_log = new Intent(getApplicationContext(),Login.class);
-                                        startActivity(intent_log);
-                                    }
-                                    else{
-                                        Toast.makeText(Registro.this, "Correo existente, ingresar otro", Toast.LENGTH_SHORT).show();
-                                    }
+        b_insertar.setOnClickListener(v -> registrarButton(mAwesomeValidation.validate()));
+    }
 
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(Registro.this,error.toString(),Toast.LENGTH_SHORT).show();
-                                }
-                            }){
-                        @Nullable
+    private void registrarButton(boolean validation){
+        Loading loading = new Loading(this);
+        loading.showDialog("Registrando");
+        if (validation){
+            snombre = t_nombre.getText().toString();
+            sapellido = t_apellido.getText().toString();
+            scorreo = t_correo.getText().toString();
+            snacionalidad = t_nacionalidad.getSelectedCountryEnglishName();
+            stelefono = t_telefono.getText().toString();
+            spassword = t_password.getText().toString();
+            url = "http://192.168.56.1/android/proy2/save.php";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                    new Response.Listener<String>() {
                         @Override
-                        protected Map<String, String> getParams() {
-                            Map<String,String> params = new HashMap<String, String>();
-                            params.put("nombre",snombre);
-                            params.put("apellido",sapellido);
-                            params.put("correo",scorreo);
-                            params.put("nacionalidad",snacionalidad);
-                            params.put("telefono",stelefono);
-                            params.put("contraseña",spassword);
-                            return params;
-                        }
-                    };
-                    RequestQueue requestQueue = Volley.newRequestQueue(Registro.this);
-                    requestQueue.add(stringRequest);
+                        public void onResponse(String response) {
+                            loading.hideDialog();
+                            if (response.equals("El usuario fue creado exitosamente")) {
+                                Intent intent_log = new Intent(getApplicationContext(),Login.class);
+                                startActivity(intent_log);
+                            }
+                            else{
+                                Toast.makeText(Registro.this, "Correo existente, ingresar otro", Toast.LENGTH_SHORT).show();
+                            }
 
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            loading.hideDialog();
+                            Toast.makeText(Registro.this,error.toString(),Toast.LENGTH_SHORT).show();
+                        }
+                    }){
+                @Nullable
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String,String> params = new HashMap<String, String>();
+                    params.put("nombre",snombre);
+                    params.put("apellido",sapellido);
+                    params.put("correo",scorreo);
+                    params.put("nacionalidad",snacionalidad);
+                    params.put("telefono",stelefono);
+                    params.put("contraseña",spassword);
+                    return params;
                 }
-            }
-        });
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(Registro.this);
+            requestQueue.add(stringRequest);
+
+        }
     }
 
     public  void login(View view){

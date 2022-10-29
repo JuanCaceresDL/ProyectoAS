@@ -95,6 +95,6 @@ public class FavoriteFragment extends Fragment implements IFavorView {
 
     @Override
     public void onFavoritoError(String msg) {
-        Toast.makeText(getContext(), "Error al obtener los favoritos", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Aún no tiene favoritos", Toast.LENGTH_SHORT).show();
     }
 }

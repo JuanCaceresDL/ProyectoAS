@@ -1,5 +1,7 @@
 package com.example.proyectoas.Model;
 
+import android.content.SharedPreferences;
+
 import com.example.proyectoas.Api.ApiClient;
 import com.example.proyectoas.Api.ItemsApi;
 import com.example.proyectoas.Bean.Favoritos;
@@ -15,6 +17,8 @@ public class FavoritoModel implements IFavoritoModel{
     private IPresenterFav presenterFav;
     private ItemsApi api;
     private Integer fId;
+    //SharedPreferences.Editor
+
 
     public FavoritoModel(IPresenterFav presenterFav){
         this.presenterFav = presenterFav;
@@ -34,7 +38,7 @@ public class FavoritoModel implements IFavoritoModel{
 
             @Override
             public void onFailure(Call<List<Favoritos>> call, Throwable t) {
-                presenterFav.onFavoritoError("Error el obtener los favoritos");
+                presenterFav.onFavoritoError("Aún no hay favoritos");
             }
         });
 
