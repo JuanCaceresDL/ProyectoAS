@@ -40,7 +40,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginBottom="5dp"
-                    android:text="@string/ingrdatos"
+                    android:text="@string/registre_sus_datos"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -91,16 +91,14 @@
                 android:inputType="textPersonName"
                 android:autofillHints="" />
 
-            <EditText
+            <com.hbb20.CountryCodePicker
                 android:id="@+id/nacionalidad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:ems="10"
-                android:hint="@string/nacionalidad"
-                android:inputType="textPersonName"
-                android:autofillHints="" />
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                android:imeOptions="actionDone"/>
 
             <EditText
                 android:id="@+id/telefono"
@@ -110,8 +108,9 @@
                 android:layout_marginEnd="10dp"
                 android:ems="10"
                 android:hint="@string/telefono"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:autofillHints="" />
+
 
             <EditText
                 android:id="@+id/contraseña"

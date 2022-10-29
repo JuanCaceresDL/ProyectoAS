@@ -17,4 +17,9 @@
     <string name="lugares_tur_sticos">Lugares turísticos</string>
     <string name="restaurantes">Restaurantes</string>
     <string name="imagenrestaurantes">imagenrestaurantes</string>
+    <string name="registre_sus_datos">registre_sus_datos</string>
+    <string name="nombre_del_restaurante">nombre_del_restaurante</string>
+    <string name="departamento">departamento</string>
+    <string name="lugares_cerca">Lugares_cerca</string>
+    <string name="datos_del_perfil">datos_del_perfil</string>
 </resources>
