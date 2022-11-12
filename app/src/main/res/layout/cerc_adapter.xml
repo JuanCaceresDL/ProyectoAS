@@ -7,7 +7,7 @@
     >
 
     <ImageView
-        android:id="@+id/fav_image"
+        android:id="@+id/lug_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,57 +15,56 @@
         android:contentDescription="@string/imagenturistico" />
 
     <TextView
-        android:id="@+id/fav_name"
+        android:id="@+id/lug_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/fav_image"
+        app:layout_constraintStart_toEndOf="@id/lug_image"
         android:layout_marginStart="20dp"
         android:textSize="18sp"
         android:textStyle="bold"
         android:text="@string/nombre_del_restaurante"/>
 
     <TextView
-        android:id="@+id/fav_departamento"
+        android:id="@+id/lug_departamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fav_name"
-        app:layout_constraintStart_toEndOf="@id/fav_image"
+        app:layout_constraintTop_toBottomOf="@id/lug_name"
+        app:layout_constraintStart_toEndOf="@id/lug_image"
         android:text="@string/departamento"
         android:textSize="16sp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/fav_fecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fav_departamento"
-        app:layout_constraintStart_toEndOf="@id/fav_image"
-        android:text="@string/fecha"
-        android:textSize="16sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"/>
+
     <ImageButton
         android:id="@+id/favbutton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintStart_toEndOf="@+id/fav_name"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lug_name"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/ic_baseline_red_24"
-        android:layout_marginStart="20dp" />
+        android:background="@drawable/ic_baseline_shadow_24"
+        android:layout_marginStart="50dp" />
+    <TextView
+        android:id="@+id/kilometraje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/lug_image"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="kilometr"
+        android:textSize="20sp"/>
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/ratingBarcerc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
         android:isIndicator="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/fav_image"
-        app:layout_constraintTop_toBottomOf="@id/fav_fecha"
+        app:layout_constraintStart_toEndOf="@id/lug_image"
+        app:layout_constraintTop_toBottomOf="@id/lug_departamento"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +31,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class FavoriteFragment extends Fragment implements IFavorView {
+    Integer uId;
     private FragmentFavoriteBinding fragmentFavoriteBinding;
     private favAdapter adapter;
     private IPresenterFav presenterFav = new PresenterFav(this);
@@ -43,6 +47,10 @@ public class FavoriteFragment extends Fragment implements IFavorView {
 
     public FavoriteFragment() {
         // Required empty public constructor
+    }
+
+    public FavoriteFragment(Integer uId) {
+        this.uId = uId;
     }
 
     /**
@@ -80,8 +88,52 @@ public class FavoriteFragment extends Fragment implements IFavorView {
         RecyclerView listafav = fragmentFavoriteBinding.recyclerfav;
         listafav.setAdapter(adapter);
         listafav.setLayoutManager(new LinearLayoutManager(getContext()));
-        presenterFav.getFavoritos();
+        presenterFav.getFavoritos(uId);
         // Inflate the layout for this fragment
+
+        Spinner spinner = fragmentFavoriteBinding.filtradoFav;
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("A-Z");
+        arrayList.add("Z-A");
+        arrayList.add("Calificación menor mayor");
+        arrayList.add("Calificación mayor menor");
+        arrayList.add("A-Z Departamento");
+        arrayList.add("Z-A Departamento");
+        arrayList.add("Visita reciente antigua");
+        arrayList.add("Visita antigua reciente");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0){
+                    adapter.filterAlfabetico1();
+                }if (i == 1){
+                    adapter.filterAlfabetico2();
+                }if (i == 2){
+                    adapter.filterAlfabetico3();
+                }if (i == 3){
+                    adapter.filterAlfabetico4();
+                }if (i == 4){
+                    adapter.filterAlfabetico5();
+                }if (i == 5){
+                    adapter.filterAlfabetico6();
+                }if (i == 6){
+                    adapter.filterAlfabetico7();
+                }if (i == 7){
+                    adapter.filterAlfabetico8();
+                }
+                fragmentFavoriteBinding.recyclerfav.scrollToPosition(0);
+                System.out.println(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         return fragmentFavoriteBinding.getRoot();
     }
     @Override

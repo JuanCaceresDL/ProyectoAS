@@ -1,9 +1,13 @@
 package com.example.proyectoas.Fragments;
 
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +34,7 @@ import java.util.List;
 public class TuristFragment extends Fragment implements ILugarView {
     private FragmentTuristBinding turistBinding;
     private lugAdapter adapter;
+    private Integer mId;
     private IPresenterLugar presenterLugar = new PresenterLugar(this);
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,10 +71,7 @@ public class TuristFragment extends Fragment implements ILugarView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -82,6 +84,44 @@ public class TuristFragment extends Fragment implements ILugarView {
         listatur.setLayoutManager(new LinearLayoutManager(getContext()));
         presenterLugar.getLugares();
         // Inflate the layout for this fragment
+
+        Spinner spinner = turistBinding.filtradoLugar;
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("A-Z");
+        arrayList.add("Z-A");
+        arrayList.add("Calificación menor mayor");
+        arrayList.add("Calificación mayor menor");
+        arrayList.add("A-Z Departamento");
+        arrayList.add("Z-A Departamento");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0){
+                    adapter.filterAlfabetico1();
+                }if (i == 1){
+                    adapter.filterAlfabetico2();
+                }if (i == 2){
+                    adapter.filterAlfabetico3();
+                }if (i == 3){
+                    adapter.filterAlfabetico4();
+                }if (i == 4){
+                    adapter.filterAlfabetico5();
+                }if (i == 5){
+                    adapter.filterAlfabetico6();
+                }
+                turistBinding.recyclertur.scrollToPosition(0);
+                System.out.println(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         return turistBinding.getRoot();
 
     }

@@ -21,12 +21,14 @@ public class Lugares {
     public String rWaze;
     @SerializedName("google")
     public String rGoogle;
+    @SerializedName("distancia")
+    public Number rDistancia;
 
 
     public Lugares() {
     }
 
-    public Lugares(Integer rId, String rNombre, String rImagen, String rDepartamento, String rDescripcion ,Float rCalificacion, String rTipo, String rWaze, String rGoogle) {
+    public Lugares(Integer rId, String rNombre, String rImagen, String rDepartamento, String rDescripcion ,Float rCalificacion, String rTipo, String rWaze, String rGoogle, Number rDistancia) {
         this.rId = rId;
         this.rNombre = rNombre;
         this.rImagen = rImagen;
@@ -36,5 +38,6 @@ public class Lugares {
         this.rWaze = rWaze;
         this.rGoogle = rGoogle;
         this.rCalificacion = rCalificacion;
+        this.rDistancia = rDistancia;
     }
 }

@@ -14,9 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.proyectoas.Bean.Lugares;
+import com.example.proyectoas.Detalles;
 import com.example.proyectoas.Fragments.TuristFragment;
 import com.example.proyectoas.R;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class lugAdapter extends RecyclerView.Adapter<lugAdapter.ViewHolder> {
@@ -91,9 +94,69 @@ public class lugAdapter extends RecyclerView.Adapter<lugAdapter.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), TuristFragment.class);
+            Intent intent = new Intent(view.getContext(), Detalles.class);
             intent.putExtra("idlug", mId);
             view.getContext().startActivity(intent);
         }
+    }
+    public void  filterAlfabetico1(){
+        Collections.sort(mLugares, new Comparator<Lugares>() {
+            @Override
+            public int compare(Lugares uno, Lugares dos) {
+                return uno.rNombre.compareTo(dos.rNombre);
+            }
+        });
+        notifyDataSetChanged();
+
+    }
+    public void  filterAlfabetico2(){
+        Collections.sort(mLugares, new Comparator<Lugares>() {
+            @Override
+            public int compare(Lugares uno, Lugares dos) {
+                return dos.rNombre.compareTo(uno.rNombre);
+            }
+        });
+        notifyDataSetChanged();
+
+    }
+    public void  filterAlfabetico3(){
+        Collections.sort(mLugares, new Comparator<Lugares>() {
+            @Override
+            public int compare(Lugares uno, Lugares dos) {
+                return uno.rCalificacion.compareTo(dos.rCalificacion);
+            }
+        });
+        notifyDataSetChanged();
+
+    }
+    public void  filterAlfabetico4(){
+        Collections.sort(mLugares, new Comparator<Lugares>() {
+            @Override
+            public int compare(Lugares uno, Lugares dos) {
+                return dos.rCalificacion.compareTo(uno.rCalificacion);
+            }
+        });
+        notifyDataSetChanged();
+
+    }
+    public void  filterAlfabetico5(){
+        Collections.sort(mLugares, new Comparator<Lugares>() {
+            @Override
+            public int compare(Lugares uno, Lugares dos) {
+                return uno.rDepartamento.compareTo(dos.rDepartamento);
+            }
+        });
+        notifyDataSetChanged();
+
+    }
+    public void  filterAlfabetico6(){
+        Collections.sort(mLugares, new Comparator<Lugares>() {
+            @Override
+            public int compare(Lugares uno, Lugares dos) {
+                return dos.rDepartamento.compareTo(uno.rDepartamento);
+            }
+        });
+        notifyDataSetChanged();
+
     }
 }

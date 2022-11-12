@@ -19,6 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,56 +46,64 @@ public class Login extends AppCompatActivity {
             Intent intent_home = new Intent(getApplicationContext(),HomeActivity.class);
             startActivity(intent_home);
         }
-        b_logear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(l_correo.getText().toString().matches("") || l_password.getText().toString().matches("") ) {
-                    Toast.makeText(Login.this, "Llenar los campos", Toast.LENGTH_SHORT).show();
-                }else{
-                    slcorreo=l_correo.getText().toString();
-                    slpassword=l_password.getText().toString();
-                    url="http://192.168.56.1/android/proy2/login.php";
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            if (!response.equals("-1")){
-                                SharedPreferences sharedPreferences;
-                                sharedPreferences = getSharedPreferences("estado", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString(KEY_ID, response);
-                                editor.apply();
-                                Toast.makeText(Login.this, "Bienvenido", Toast.LENGTH_SHORT).show();
-                                Intent intent_home = new Intent(getApplicationContext(),HomeActivity.class);
-                                startActivity(intent_home);
-                            }
-                            else{
-                                SharedPreferences sharedPreferences;
-                                sharedPreferences = getSharedPreferences("estado", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString(KEY_ID, null);
-                                editor.apply();
-                                Toast.makeText(Login.this, "Algo falló", Toast.LENGTH_SHORT).show();
-                            }
+        AwesomeValidation mAwesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        b_logear.setOnClickListener(view -> logeando(mAwesomeValidation.validate()));
+    }
+
+    public void logeando(boolean validacion){
+        Loading loading = new Loading(this);
+        loading.showDialog("Ingresando");
+        if (validacion){
+            if(l_correo.getText().toString().matches("") || l_password.getText().toString().matches("") ) {
+                Toast.makeText(Login.this, "Llenar los campos", Toast.LENGTH_SHORT).show();
+            }else{
+                slcorreo=l_correo.getText().toString();
+                slpassword=l_password.getText().toString();
+                url="http://192.168.1.36/android/proy2/login.php";
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        loading.hideDialog();
+                        if (!response.equals("-1")){
+                            SharedPreferences sharedPreferences;
+                            sharedPreferences = getSharedPreferences("estado", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString(KEY_ID, response);
+                            editor.apply();
+                            Toast.makeText(Login.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                            Intent intent_home = new Intent(getApplicationContext(),HomeActivity.class);
+                            startActivity(intent_home);
+                            finish();
                         }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(Login.this,error.toString(),Toast.LENGTH_SHORT).show();
+                        else{
+                            SharedPreferences sharedPreferences;
+                            sharedPreferences = getSharedPreferences("estado", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString(KEY_ID, null);
+                            editor.apply();
+                            Toast.makeText(Login.this, "Algo falló", Toast.LENGTH_SHORT).show();
                         }
-                    }){
-                        @Nullable
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String,String> params = new HashMap<String, String>();
-                            params.put("correo",slcorreo);
-                            params.put("contraseña",slpassword);
-                            return params;
-                        }
-                    };
-                    RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
-                    requestQueue.add(stringRequest);
-                }
-            }});
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        loading.hideDialog();
+                        Toast.makeText(Login.this,error.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                }){
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("correo",slcorreo);
+                        params.put("contraseña",slpassword);
+                        return params;
+                    }
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
+                requestQueue.add(stringRequest);
+            }
+        }
     }
 
     public  void registro(View view){

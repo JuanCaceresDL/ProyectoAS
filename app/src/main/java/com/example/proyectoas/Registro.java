@@ -59,7 +59,7 @@ public class Registro extends AppCompatActivity {
             snacionalidad = t_nacionalidad.getSelectedCountryEnglishName();
             stelefono = t_telefono.getText().toString();
             spassword = t_password.getText().toString();
-            url = "http://192.168.56.1/android/proy2/save.php";
+            url = "http://192.168.1.36/android/proy2/save.php";
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override

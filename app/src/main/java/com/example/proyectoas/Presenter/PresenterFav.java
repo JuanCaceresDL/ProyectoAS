@@ -18,7 +18,7 @@ public class PresenterFav implements IPresenterFav{
 
     }
     @Override
-    public void getFavoritos() {this.model.getFavoritos();}
+    public void getFavoritos(Integer uId) {this.model.getFavoritos(uId);}
 
     @Override
     public void onFavoritoSuccess(List<Favoritos> favoritos) {

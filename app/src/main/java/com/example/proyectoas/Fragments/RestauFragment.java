@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -82,6 +85,42 @@ public class RestauFragment extends Fragment implements ILugarView {
         listares.setLayoutManager(new LinearLayoutManager(getContext()));
         presenteRestau.getLugarestau();
         // Inflate the layout for this fragment
+        Spinner spinner = restauBinding.filtradoRest;
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("A-Z");
+        arrayList.add("Z-A");
+        arrayList.add("Calificación menor mayor");
+        arrayList.add("Calificación mayor menor");
+        arrayList.add("A-Z Departamento");
+        arrayList.add("Z-A Departamento");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0){
+                    adapter.filterAlfabetico1();
+                }if (i == 1){
+                    adapter.filterAlfabetico2();
+                }if (i == 2){
+                    adapter.filterAlfabetico3();
+                }if (i == 3){
+                    adapter.filterAlfabetico4();
+                }if (i == 4){
+                    adapter.filterAlfabetico5();
+                }if (i == 5){
+                    adapter.filterAlfabetico6();
+                }
+                restauBinding.recycleres.scrollToPosition(0);
+                System.out.println(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         return restauBinding.getRoot();
     }
 

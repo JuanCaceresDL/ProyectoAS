@@ -1,5 +1,5 @@
 package com.example.proyectoas.Model;
 
 public interface IFavoritoModel {
-    void getFavoritos();
+    void getFavoritos(Integer fId);
 }

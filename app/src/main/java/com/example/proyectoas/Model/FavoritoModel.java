@@ -16,9 +16,6 @@ import retrofit2.Response;
 public class FavoritoModel implements IFavoritoModel{
     private IPresenterFav presenterFav;
     private ItemsApi api;
-    private Integer fId;
-    //SharedPreferences.Editor
-
 
     public FavoritoModel(IPresenterFav presenterFav){
         this.presenterFav = presenterFav;
@@ -27,7 +24,8 @@ public class FavoritoModel implements IFavoritoModel{
     }
 
     @Override
-    public void getFavoritos() {
+    public void getFavoritos(Integer fId) {
+
         Call<List<Favoritos>> favCall = api.getFavoritos(fId);
         favCall.enqueue(new Callback<List<Favoritos>>() {
             @Override

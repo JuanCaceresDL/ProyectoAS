@@ -1,5 +1,8 @@
 package com.example.proyectoas;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,10 +20,20 @@ import com.example.proyectoas.databinding.ActivityHomeBinding;
 public class HomeActivity extends AppCompatActivity {
 
     ActivityHomeBinding binding;
+    String uId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences("estado", Context.MODE_PRIVATE);
+        uId = sharedPreferences.getString("id",null);
+        if (uId == null) {
+            Intent intent_log = new Intent(getApplicationContext(),Login.class);
+            startActivity(intent_log);
+        }
+        Integer nuId = Integer.parseInt(uId);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -36,13 +49,13 @@ public class HomeActivity extends AppCompatActivity {
                     replaceFragment(new RestauFragment());
                     break;
                 case R.id.favoritos:
-                    replaceFragment(new FavoriteFragment());
+                    replaceFragment(new FavoriteFragment(nuId));
                     break;
                 case R.id.cerca:
                     replaceFragment(new CloseFragment());
                     break;
                 case R.id.perfil:
-                    replaceFragment(new ProfileFragment());
+                    replaceFragment(new ProfileFragment(nuId));
                     break;
             }
 
@@ -56,4 +69,5 @@ public class HomeActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.layouthome, fragment);
         fragmentTransaction.commit();
     }
+
 }

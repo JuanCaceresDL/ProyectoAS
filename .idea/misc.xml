@@ -3,12 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_baseline_chat_bubble_outline_24.xml" value="0.2595" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_baseline_comment_24.xml" value="0.124" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_baseline_drive_eta_24.xml" value="0.2525" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.2595" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.2595" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.2525" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_baseline_red_24.xml" value="0.1705" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_red_favorite_24.xml" value="0.2525" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_shadow_favorite_24.xml" value="0.2525" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_detalles.xml" value="0.20863616930312098" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_login.xml" value="0.176" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
@@ -17,12 +21,17 @@
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_rest.xml" value="0.2" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_restaurant.xml" value="0.176" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_turistico.xml" value="0.20963541666666666" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/cerc_adapter.xml" value="0.264" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/com_adapter.xml" value="0.264" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/des_adapter.xml" value="0.18541666666666667" />
-        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fav_adapter.xml" value="0.1" />
-        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_close.xml" value="0.1" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fav_adapter.xml" value="0.264" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_close.xml" value="0.264" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_comment.xml" value="0.19709277469003847" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_descript.xml" value="0.20863616930312098" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_favorite.xml" value="0.25416666666666665" />
-        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
-        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_restau.xml" value="0.1" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_profile.xml" value="0.19904458598726116" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_restau.xml" value="0.16" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_turist.xml" value="0.20863616930312098" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/lug_adapter.xml" value="0.264" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/res_adapter.xml" value="0.264" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/tur_adapter.xml" value="0.16799999999999998" />
