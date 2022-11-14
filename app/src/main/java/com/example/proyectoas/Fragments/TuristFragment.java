@@ -86,7 +86,7 @@ public class TuristFragment extends Fragment implements ILugarView {
         RecyclerView listatur = turistBinding.recyclertur;
         listatur.setAdapter(adapter);
         listatur.setLayoutManager(new LinearLayoutManager(getContext()));
-        presenterLugar.getLugares();
+        presenterLugar.getLugares(Integer.parseInt(uId));
         // Inflate the layout for this fragment
 
         Spinner spinner = turistBinding.filtradoLugar;
@@ -146,5 +146,11 @@ public class TuristFragment extends Fragment implements ILugarView {
     @Override
     public void onLugarError(String msg) {
         Toast.makeText(getContext(), "Error al obtener los lugares", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenterLugar.getLugares(Integer.parseInt(uId));
     }
 }

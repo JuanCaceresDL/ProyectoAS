@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.example.proyectoas.Api.ApiClient;
@@ -92,9 +93,20 @@ private FragmentDescriptBinding fragmentDescriptBinding;
                 TextView descript = v.findViewById(R.id.descript);
                 descript.setText(response.body().rDescripcion);
                 RatingBar rating = v.findViewById(R.id.rating);
-                rating.setRating(response.body().rCalificacion);
+                if (response.body().rCalificacion == null){
+                   rating.setRating(0);
+                }else {
+                    rating.setRating(response.body().rCalificacion);
+                }
                 TextView nombr = v.findViewById(R.id.nombredes);
                 nombr.setText(response.body().rNombre);
+                ToggleButton dfav = v.findViewById(R.id.favdescript);
+                dfav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
                 ImageView image = v.findViewById(R.id.imagendescr);
                 Glide.with(DescriptFragment.this).load(response.body().rImagen).into(image);
                 waze=v.findViewById(R.id.waze);

@@ -145,6 +145,7 @@ public Perfil perfil;
                 editor.commit();
                 Intent intent_home = new Intent(getActivity(), Login.class);
                 startActivity(intent_home);
+                getActivity().onBackPressed();
             }
         });
 

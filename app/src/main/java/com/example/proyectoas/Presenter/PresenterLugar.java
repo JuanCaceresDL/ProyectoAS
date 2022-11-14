@@ -18,8 +18,8 @@ public class PresenterLugar implements IPresenterLugar{
     }
 
     @Override
-    public void getLugares() {
-        this.model.getLugares();
+    public void getLugares(Integer uId) {
+        this.model.getLugares(uId);
     }
 
     @Override

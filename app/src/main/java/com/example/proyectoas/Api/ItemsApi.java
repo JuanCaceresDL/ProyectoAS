@@ -15,11 +15,13 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ItemsApi {
-    @GET("/android/proy2/getLugarestur.php")
-    Call<List<Lugares>> getLugares();
+    @FormUrlEncoded
+    @POST("/android/proy2/getLugarestur.php")
+    Call<List<Lugares>> getLugares(@Field("idus") Integer uId);
 
-    @GET("/android/proy2/getLugarestau.php")
-    Call<List<Lugares>> getLugarestau();
+    @FormUrlEncoded
+    @POST("/android/proy2/getLugarestau.php")
+    Call<List<Lugares>> getLugarestau(@Field("idus") Integer uId);
 
     @GET("/android/proy2/getCercanos.php")
     Call<List<Lugares>> getCercanos(@Query("latitud") Double latitud, @Query("longitud") Double longitud);
@@ -39,6 +41,19 @@ public interface ItemsApi {
     @FormUrlEncoded
     @POST("android/proy2/getComentarios.php")
     Call<List<Comentarios>> getComentarios(@Field("idlug") Integer mId);
+
+    @FormUrlEncoded
+    @POST("android/proy2/comentarios.php")
+    Call<Comentarios> postComentarios(@Field("idus") Integer uId,@Field("idlug") Integer lId,@Field("comentario") String comentario);
+
+
+    @FormUrlEncoded
+    @POST("android/proy2/deletecoment.php")
+    Call<String> deleteComentarios(@Field("id") Integer cId,@Field("idlug") Integer lId);
+
+    @FormUrlEncoded
+    @POST("android/proy2/calificacion.php")
+    Call<String> addCalificacion(@Field("idus") Integer uId,@Field("idlug") Integer lId, @Field("calificacionp") Float calificacion);
 
     @FormUrlEncoded
     @POST("android/proy2/getDetalles.php")

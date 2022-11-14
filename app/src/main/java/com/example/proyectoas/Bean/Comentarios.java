@@ -3,6 +3,8 @@ package com.example.proyectoas.Bean;
 import com.google.gson.annotations.SerializedName;
 
 public class Comentarios {
+    @SerializedName("id")
+    public Integer comId;
     @SerializedName("idlug")
     public Integer cId;
     @SerializedName("idus")

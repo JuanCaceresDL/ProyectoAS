@@ -1,7 +1,9 @@
 package com.example.proyectoas.Fragments;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,10 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.proyectoas.Adapter.comAdapter;
+import com.example.proyectoas.Api.ApiClient;
+import com.example.proyectoas.Api.ItemsApi;
 import com.example.proyectoas.Bean.Comentarios;
 import com.example.proyectoas.Presenter.IPresenterCom;
 import com.example.proyectoas.Presenter.PresenterCom;
@@ -27,6 +32,10 @@ import com.example.proyectoas.databinding.FragmentCommentBinding;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CommentFragment#newInstance} factory method to
@@ -34,6 +43,8 @@ import java.util.List;
  */
 public class CommentFragment extends Fragment implements IComentView, View.OnClickListener {
     Integer mId;
+    String uId;
+    private ItemsApi api;
     private FragmentCommentBinding commentBinding;
     private comAdapter adapter;
     private IPresenterCom presenterCom = new PresenterCom(this);
@@ -79,7 +90,9 @@ public class CommentFragment extends Fragment implements IComentView, View.OnCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        adapter = new comAdapter(new ArrayList<>());
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("estado", Context.MODE_PRIVATE);
+        uId = preferences.getString("id",null);
+        adapter = new comAdapter(new ArrayList<>(),uId);
         commentBinding = FragmentCommentBinding.inflate(getLayoutInflater());
         RecyclerView listacom = commentBinding.recyclercomment;
         listacom.setAdapter(adapter);
@@ -112,9 +125,70 @@ public class CommentFragment extends Fragment implements IComentView, View.OnCli
                 alert.setButton(AlertDialog.BUTTON_POSITIVE, "Ok",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                //presenterCom.postComentarios(Integer.parseInt(uId),mId,comentario.getText().toString());
+                                //adapter.notifyItemInserted(adapter.getItemCount());
+                                ItemsApi commentAPI = ApiClient.getInstance().create(ItemsApi.class);
+                                Call<Comentarios> comentariosCall = commentAPI.postComentarios(Integer.parseInt(uId), mId, comentario.getText().toString());
+                                comentariosCall.enqueue(new Callback<Comentarios>() {
+                                    @Override
+                                    public void onResponse(Call<Comentarios> call, Response<Comentarios> response) {
+                                        System.out.println(response.body());
+                                        adapter.AddComentario(response.body());
+                                        adapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Comentarios> call, Throwable t) {
+                                        System.out.println(t.toString());
+                                    }
+                                });
                                 dialog.dismiss();
+                                AlertDialog alert = new AlertDialog.Builder(getActivity()).create();
+                                alert.setTitle("Tu calificación");
+                                RatingBar calificacionp = new RatingBar(getActivity());
+                                calificacionp.setNumStars(5);
+                                LinearLayout elpadre = new LinearLayout(getActivity());
+                                LinearLayout.LayoutParams rating = new LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT
+                                );
+                                elpadre.addView(calificacionp);
+                                alert.setView(elpadre);
+                                alert.setButton(AlertDialog.BUTTON_POSITIVE, "Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Call<String> calificCall = commentAPI.addCalificacion(Integer.parseInt(uId), mId, calificacionp.getRating());
+                                                calificCall.enqueue(new Callback<String>() {
+                                                    @Override
+                                                    public void onResponse(Call<String> call, Response<String> response) {
+                                                        System.out.println(response.body());
+                                                        presenterCom.getComent(mId);
+
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(Call<String> call, Throwable t) {
+                                                        System.out.println(t.toString());
+                                                    }
+                                                });
+                                            }
+                                        });
+                                alert.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancelar",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                alert.show();
+
                             }
                         });
+                alert.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancelar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
                 alert.show();
 
     }

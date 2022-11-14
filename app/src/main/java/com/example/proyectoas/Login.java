@@ -81,7 +81,7 @@ public class Login extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString(KEY_ID, null);
                             editor.apply();
-                            Toast.makeText(Login.this, "Algo falló", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Algún campo está incorrecto", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {

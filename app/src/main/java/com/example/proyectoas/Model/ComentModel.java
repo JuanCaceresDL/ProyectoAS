@@ -38,4 +38,22 @@ public class ComentModel implements IComentModel{
             }
         });
     }
+
+    @Override
+    public void postComentarios(Integer uId, Integer lId, String comentario) {
+
+        Call<Comentarios> comentariosCall = api.postComentarios(uId, lId, comentario);
+        comentariosCall.enqueue(new Callback<Comentarios>() {
+            @Override
+            public void onResponse(Call<Comentarios> call, Response<Comentarios> response) {
+                System.out.println(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<Comentarios> call, Throwable t) {
+               System.out.println(t.toString());
+            }
+        });
+    }
 }

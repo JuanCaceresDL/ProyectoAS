@@ -98,6 +98,8 @@ public class Registro extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(Registro.this);
             requestQueue.add(stringRequest);
 
+        }else{
+            loading.hideDialog();
         }
     }
 

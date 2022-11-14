@@ -1,5 +1,5 @@
 package com.example.proyectoas.Model;
 
 public interface IRestauModel {
-    void getLugarestau();
+    void getLugarestau(Integer uId);
 }

@@ -158,5 +158,9 @@ public class FavoriteFragment extends Fragment implements IFavorView {
         Toast.makeText(getContext(), "Aún no tiene favoritos", Toast.LENGTH_SHORT).show();
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenterFav.getFavoritos(uId);
+    }
 }

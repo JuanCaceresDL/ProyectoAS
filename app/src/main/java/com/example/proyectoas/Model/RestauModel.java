@@ -21,8 +21,8 @@ public class RestauModel implements IRestauModel{
     }
 
     @Override
-    public void getLugarestau() {
-        Call<List<Lugares>> lugCall = api.getLugarestau();
+    public void getLugarestau(Integer uId) {
+        Call<List<Lugares>> lugCall = api.getLugarestau(uId);
         lugCall.enqueue(new Callback<List<Lugares>>() {
             @Override
             public void onResponse(Call<List<Lugares>> call, Response<List<Lugares>> response) {

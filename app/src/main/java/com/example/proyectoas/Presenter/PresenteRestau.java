@@ -18,7 +18,7 @@ public class PresenteRestau implements IPresenteRestau{
 
     }
     @Override
-    public void getLugarestau() {this.model.getLugarestau();}
+    public void getLugarestau(Integer uId) {this.model.getLugarestau(uId);}
 
     @Override
     public void onLugaresSuccess(List<Lugares> lugares) {

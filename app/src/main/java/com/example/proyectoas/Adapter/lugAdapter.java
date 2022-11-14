@@ -76,9 +76,15 @@ public class lugAdapter extends RecyclerView.Adapter<lugAdapter.ViewHolder> {
         TextView lugDepartTextView = holder.mLugDepartamento;
         lugDepartTextView.setText(lugares.rDepartamento);
         RatingBar lugRatingRatingBar = holder.mCalificacion;
-        lugRatingRatingBar.setRating(lugares.rCalificacion);
+        if (lugares.rCalificacion == null){
+            lugRatingRatingBar.setRating(0);
+        }else {
+            lugRatingRatingBar.setRating(lugares.rCalificacion);
+        }
         ImageView bookImage = holder.mLugImagen;
         holder.mId = lugares.rId;
+
+
 
         if (lugares.rFavorito == null){
             holder.mFavorito.setChecked(false);

@@ -22,8 +22,8 @@ public class LugarModel implements ILugarModel{
     }
 
     @Override
-    public void getLugares() {
-        Call<List<Lugares>> lugCall = api.getLugares();
+    public void getLugares(Integer uId) {
+        Call<List<Lugares>> lugCall = api.getLugares(uId);
         lugCall.enqueue(new Callback<List<Lugares>>() {
             @Override
             public void onResponse(Call<List<Lugares>> call, Response<List<Lugares>> response) {

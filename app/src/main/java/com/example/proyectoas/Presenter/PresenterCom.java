@@ -21,6 +21,11 @@ public class PresenterCom implements IPresenterCom{
     public void getComent(Integer mId) {this.model.getComentarios(mId);}
 
     @Override
+    public void postComentarios(Integer uId, Integer lId, String comentario) {
+        this.model.postComentarios(uId,lId,comentario);
+    }
+
+    @Override
     public void onComentSuccess(List<Comentarios> comentarios) {
         if (view == null)
             return;

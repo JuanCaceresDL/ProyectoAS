@@ -88,7 +88,7 @@ public class RestauFragment extends Fragment implements ILugarView {
         RecyclerView listares = restauBinding.recycleres;
         listares.setAdapter(adapter);
         listares.setLayoutManager(new LinearLayoutManager(getContext()));
-        presenteRestau.getLugarestau();
+        presenteRestau.getLugarestau(Integer.parseInt(uId));
         // Inflate the layout for this fragment
         Spinner spinner = restauBinding.filtradoRest;
         ArrayList<String> arrayList = new ArrayList<>();
@@ -144,5 +144,9 @@ public class RestauFragment extends Fragment implements ILugarView {
     @Override
     public void onLugarError(String msg) {
         Toast.makeText(getContext(), "Error al obtener los restaurantes", Toast.LENGTH_SHORT).show();
+    }
+    public void onResume() {
+        super.onResume();
+        presenteRestau.getLugarestau(Integer.parseInt(uId));
     }
 }
