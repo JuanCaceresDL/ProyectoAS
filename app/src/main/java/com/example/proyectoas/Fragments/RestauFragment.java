@@ -1,5 +1,7 @@
 package com.example.proyectoas.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +35,7 @@ import java.util.List;
 public class RestauFragment extends Fragment implements ILugarView {
     private FragmentRestauBinding restauBinding;
     private lugAdapter adapter;
+    private String uId;
     private IPresenteRestau presenteRestau = new PresenteRestau(this);
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,7 +81,9 @@ public class RestauFragment extends Fragment implements ILugarView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        adapter = new lugAdapter(new ArrayList<>());
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("estado", Context.MODE_PRIVATE);
+        uId = preferences.getString("id",null);
+        adapter = new lugAdapter(new ArrayList<>(), this, uId);
         restauBinding = FragmentRestauBinding.inflate(getLayoutInflater());
         RecyclerView listares = restauBinding.recycleres;
         listares.setAdapter(adapter);
@@ -118,7 +123,8 @@ public class RestauFragment extends Fragment implements ILugarView {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                adapter.filterAlfabetico1();
+                restauBinding.recycleres.scrollToPosition(0);
             }
         });
         return restauBinding.getRoot();
@@ -131,7 +137,9 @@ public class RestauFragment extends Fragment implements ILugarView {
     }
 
     @Override
-    public void onLugarSuccess(List<Lugares> lugares) {adapter.reloadData(lugares);}
+    public void onLugarSuccess(List<Lugares> lugares) {
+        adapter.reloadData(lugares);
+        adapter.filterAlfabetico1();}
 
     @Override
     public void onLugarError(String msg) {

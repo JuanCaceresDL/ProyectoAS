@@ -29,6 +29,14 @@ public interface ItemsApi {
     Call<List<Favoritos>> getFavoritos(@Field("idus") Integer uId);
 
     @FormUrlEncoded
+    @POST("android/proy2/favoritos.php")
+    Call<String> postFavoritos(@Field("idus") Integer uId,@Field("idlug") Integer lId, @Field("favor") Integer uno);
+
+    @FormUrlEncoded
+    @POST("android/proy2/deletefav.php")
+    Call<String> deleteFavoritos(@Field("idus") Integer uId,@Field("idlug") Integer lId);
+
+    @FormUrlEncoded
     @POST("android/proy2/getComentarios.php")
     Call<List<Comentarios>> getComentarios(@Field("idlug") Integer mId);
 

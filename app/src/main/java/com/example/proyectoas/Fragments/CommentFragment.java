@@ -107,14 +107,15 @@ public class CommentFragment extends Fragment implements IComentView, View.OnCli
 
                 AlertDialog alert = new AlertDialog.Builder(getActivity()).create();
                 alert.setTitle("comentario");
-                alert.show();
                 EditText comentario = new EditText(getActivity());
                 alert.setView(comentario);
-                alert.setButton(AlertDialog.BUTTON_NEGATIVE, "Ok",
+                alert.setButton(AlertDialog.BUTTON_POSITIVE, "Ok",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();                    }
+                                dialog.dismiss();
+                            }
                         });
+                alert.show();
 
     }
 }

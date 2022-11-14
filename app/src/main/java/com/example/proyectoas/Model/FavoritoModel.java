@@ -41,4 +41,35 @@ public class FavoritoModel implements IFavoritoModel{
         });
 
     }
+
+    @Override
+    public void postFavoritos(Integer fId, Integer uId) {
+        Call<String> favCall = api.postFavoritos(fId,uId,1);
+        favCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                System.out.println(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                presenterFav.onFavoritoError("Aún no hay favoritos");
+            }
+        });
+    }
+    public void deleteFavorito(Integer fId, Integer uId) {
+        Call<String> favCall = api.deleteFavoritos(uId,fId);
+        favCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                System.out.println(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
+    }
 }

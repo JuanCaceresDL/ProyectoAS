@@ -12,6 +12,9 @@
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_baseline_red_24.xml" value="0.1705" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_red_favorite_24.xml" value="0.2525" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/ic_shadow_favorite_24.xml" value="0.2525" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/togglebutton_off.xml" value="0.104" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/togglebutton_on.xml" value="0.104" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/drawable/tooglebutton_selector.xml" value="0.104" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_detalles.xml" value="0.20863616930312098" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/activity_login.xml" value="0.176" />
@@ -34,6 +37,7 @@
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/fragment_turist.xml" value="0.20863616930312098" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/lug_adapter.xml" value="0.264" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/res_adapter.xml" value="0.264" />
+        <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/tooglebutton_selector.xml" value="0.10154617634768073" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/layout/tur_adapter.xml" value="0.16799999999999998" />
         <entry key="..\:/unis/10moSemestre/DesarrolloMovil/Project/app/src/main/res/menu/bottom_lug_menu.xml" value="0.11302083333333333" />
       </map>

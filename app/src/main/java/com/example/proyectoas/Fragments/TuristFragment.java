@@ -1,5 +1,7 @@
 package com.example.proyectoas.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
@@ -34,7 +36,7 @@ import java.util.List;
 public class TuristFragment extends Fragment implements ILugarView {
     private FragmentTuristBinding turistBinding;
     private lugAdapter adapter;
-    private Integer mId;
+    private String uId;
     private IPresenterLugar presenterLugar = new PresenterLugar(this);
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,7 +79,9 @@ public class TuristFragment extends Fragment implements ILugarView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        adapter = new lugAdapter(new ArrayList<>());
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("estado", Context.MODE_PRIVATE);
+        uId = preferences.getString("id",null);
+        adapter = new lugAdapter(new ArrayList<>(), this, uId);
         turistBinding = FragmentTuristBinding.inflate(getLayoutInflater());
         RecyclerView listatur = turistBinding.recyclertur;
         listatur.setAdapter(adapter);
@@ -118,7 +122,8 @@ public class TuristFragment extends Fragment implements ILugarView {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                adapter.filterAlfabetico1();
+                turistBinding.recyclertur.scrollToPosition(0);
             }
         });
 
@@ -135,6 +140,7 @@ public class TuristFragment extends Fragment implements ILugarView {
     @Override
     public void onLugarSuccess(List<Lugares> lugares) {
         adapter.reloadData(lugares);
+        adapter.filterAlfabetico1();
     }
 
     @Override

@@ -21,6 +21,15 @@ public class PresenterFav implements IPresenterFav{
     public void getFavoritos(Integer uId) {this.model.getFavoritos(uId);}
 
     @Override
+    public void postFavoritos(Integer fId, Integer uId) {
+        this.model.postFavoritos(fId,uId);
+    }
+
+    @Override
+    public void deleteFavoritos(Integer fId, Integer uId) {
+        this.model.deleteFavorito(fId, uId);
+    }
+    @Override
     public void onFavoritoSuccess(List<Favoritos> favoritos) {
         if (view == null)
             return;

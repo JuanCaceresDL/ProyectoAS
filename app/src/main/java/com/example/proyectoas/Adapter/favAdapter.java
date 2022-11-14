@@ -1,6 +1,8 @@
 package com.example.proyectoas.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -9,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -19,7 +23,13 @@ import com.example.proyectoas.Bean.Favoritos;
 import com.example.proyectoas.Bean.Lugares;
 import com.example.proyectoas.Detalles;
 import com.example.proyectoas.Fragments.TuristFragment;
+import com.example.proyectoas.Presenter.IPresenterFav;
+import com.example.proyectoas.Presenter.IPresenterLugar;
+import com.example.proyectoas.Presenter.PresenterFav;
+import com.example.proyectoas.Presenter.PresenterLugar;
 import com.example.proyectoas.R;
+import com.example.proyectoas.View.IFavorView;
+import com.example.proyectoas.View.ILugarView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -35,9 +45,15 @@ public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
 
     private List<Favoritos> mFavoritos;
     private Context context;
+    private IFavorView favorView;
+    private IPresenterFav presenterFav;
+    private String uId;
 
-    public favAdapter(List<Favoritos> mFavoritos) {
+    public favAdapter(List<Favoritos> mFavoritos, IFavorView favorView, String uId) {
         this.mFavoritos = mFavoritos;
+        this.favorView = favorView;
+        this.presenterFav = new PresenterFav(favorView);
+        this.uId = uId;
     }
 
     public void reloadData(List<Favoritos> favoritos) {
@@ -75,6 +91,7 @@ public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
         lugRatingRatingBar.setRating(favoritos.fCalificacion);
         ImageView bookImage = holder.mFavImagen;
         TextView lugFecha = holder.mFavFecha;
+
         if (favoritos.fVisita != null){
             String pattern = "yyyy-MM-dd";
             DateFormat df = new SimpleDateFormat(pattern);
@@ -86,6 +103,41 @@ public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
 
         holder.mId = favoritos.fId;
         holder.lId = favoritos.fIdlug;
+
+        if (favoritos.fFavorito == null){
+            holder.mFavorito.setChecked(false);
+        }else {
+            holder.mFavorito.setChecked(true);
+        }
+        holder.mFavorito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.mFavorito.isChecked()){
+                    presenterFav.postFavoritos(favoritos.fIdlug, Integer.parseInt(uId));
+                }
+                if (!holder.mFavorito.isChecked()){
+                    AlertDialog confirmacion = new AlertDialog.Builder(context).create();
+                    confirmacion.setTitle("Confirma eliminación");
+                    confirmacion.setButton(AlertDialog.BUTTON_POSITIVE, "Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    presenterFav.deleteFavoritos(favoritos.fIdlug, Integer.parseInt(uId));
+                                    Toast.makeText(context,"Eliminado de favoritos",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context,"Recargue para ver los cambios",Toast.LENGTH_LONG).show();
+                                    dialog.dismiss();
+                                }
+                            });
+                    confirmacion.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancelar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    holder.mFavorito.setChecked(true);
+                                    dialog.dismiss();
+                                }
+                            });
+                    confirmacion.show();
+                }
+            }
+        });
 
         Glide.with(this.context).load(favoritos.fImagen).into(bookImage);
     }
@@ -102,6 +154,7 @@ public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
         private TextView mFavDepartamento;
         private TextView mFavFecha;
         private RatingBar fCalificacion;
+        private ToggleButton mFavorito;
         public Integer mId, lId;
 
         public ViewHolder(@NonNull View itemView) {
@@ -112,6 +165,7 @@ public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
             mFavDepartamento = (TextView) itemView.findViewById(R.id.fav_departamento);
             fCalificacion = (RatingBar) itemView.findViewById(R.id.ratingBar);
             mFavFecha = (TextView) itemView.findViewById(R.id.fav_fecha);
+            mFavorito = itemView.findViewById(R.id.favbutton);
             itemView.setOnClickListener(this);
         }
 

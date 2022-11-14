@@ -38,4 +38,6 @@
     <string name="comentario_de_usuario">comentario de usuario</string>
     <string name="nombre_de_usuario">nombre de usuario</string>
     <string name="fecha">fecha</string>
+    <string name="kilometr">kilometr</string>
+    <string name="kilometros_de_distancia">Kilometros de distancia:</string>
 </resources>

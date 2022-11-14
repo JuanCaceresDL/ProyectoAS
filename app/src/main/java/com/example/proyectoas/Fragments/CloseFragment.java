@@ -1,6 +1,8 @@
 package com.example.proyectoas.Fragments;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -39,7 +41,7 @@ import java.util.List;
 public class CloseFragment extends Fragment implements ILugarView {
     private FragmentCloseBinding closeBinding;
     private cercAdapter adapter;
-    private Integer mId;
+    private String uId;
     private Spinner filtro;
     private IPresenterClose presenterClose = new PresenterCercanos(this);
     private FusedLocationProviderClient fusedLocationClient;
@@ -85,6 +87,8 @@ public class CloseFragment extends Fragment implements ILugarView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("estado", Context.MODE_PRIVATE);
+        uId = preferences.getString("id",null);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
@@ -106,7 +110,7 @@ public class CloseFragment extends Fragment implements ILugarView {
             }
         });
 
-        adapter = new cercAdapter(new ArrayList<>());
+        adapter = new cercAdapter(new ArrayList<>(),this,uId);
         closeBinding = FragmentCloseBinding.inflate(getLayoutInflater());
         RecyclerView listacerc = closeBinding.recyclerclose;
         listacerc.setAdapter(adapter);
@@ -136,13 +140,15 @@ public class CloseFragment extends Fragment implements ILugarView {
                 }if (i == 4){
                     adapter.filtrarCercano(100.0000);
                 }
+                adapter.filterDistancia();
 
                 System.out.println(i);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                adapter.filtrarCercano(5.0000);
+                closeBinding.recyclerclose.scrollToPosition(0);
             }
         });
 
@@ -152,6 +158,7 @@ public class CloseFragment extends Fragment implements ILugarView {
     @Override
     public void onLugarSuccess(List<Lugares> lugares) {
         adapter.reloadData(lugares);
+        adapter.filterDistancia();
     }
 
     @Override

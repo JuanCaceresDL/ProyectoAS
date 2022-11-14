@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
+    android:background="@drawable/layout_bd"
+    android:layout_margin="20dp"
     >
 
     <ImageView
@@ -23,6 +25,8 @@
         android:layout_marginStart="20dp"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/white"
         android:text="@string/nombre_del_restaurante"/>
 
     <TextView
@@ -34,7 +38,8 @@
         android:text="@string/departamento"
         android:textSize="16sp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"/>
     <TextView
         android:id="@+id/fav_fecha"
         android:layout_width="wrap_content"
@@ -43,17 +48,20 @@
         app:layout_constraintStart_toEndOf="@id/fav_image"
         android:text="@string/fecha"
         android:textSize="16sp"
+        android:textColor="@color/white"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"/>
-    <ImageButton
+    <ToggleButton
         android:id="@+id/favbutton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintStart_toEndOf="@+id/fav_name"
+        android:textOn=""
+        android:textOff=""
+        android:layout_marginTop="5dp"
+        android:background="@drawable/tooglebutton_selector"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/ic_baseline_red_24"
-        android:layout_marginStart="20dp" />
+         />
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -65,7 +73,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/fav_image"
+        app:layout_constraintStart_toStartOf="@id/fav_image"
         app:layout_constraintTop_toBottomOf="@id/fav_fecha"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

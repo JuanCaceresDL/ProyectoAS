@@ -23,6 +23,16 @@ public class PresenterLugar implements IPresenterLugar{
     }
 
     @Override
+    public void postFavoritos(Integer fId, Integer uId) {
+        this.model.postFavoritos(fId,uId);
+    }
+
+    @Override
+    public void deleteFavoritos(Integer fId, Integer uId) {
+        this.model.deleteFavorito(fId, uId);
+    }
+
+    @Override
     public void onLugaresSuccess(List<Lugares> lugares) {
         if (view == null)
             return;

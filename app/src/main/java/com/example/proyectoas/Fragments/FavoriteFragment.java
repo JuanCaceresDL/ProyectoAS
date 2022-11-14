@@ -1,5 +1,7 @@
 package com.example.proyectoas.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,7 @@ public class FavoriteFragment extends Fragment implements IFavorView {
     private FragmentFavoriteBinding fragmentFavoriteBinding;
     private favAdapter adapter;
     private IPresenterFav presenterFav = new PresenterFav(this);
+    String usId;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,7 +86,9 @@ public class FavoriteFragment extends Fragment implements IFavorView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        adapter = new favAdapter(new ArrayList<>());
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("estado", Context.MODE_PRIVATE);
+        usId = preferences.getString("id",null);
+        adapter = new favAdapter(new ArrayList<>(),this,usId);
         fragmentFavoriteBinding = FragmentFavoriteBinding.inflate(getLayoutInflater());
         RecyclerView listafav = fragmentFavoriteBinding.recyclerfav;
         listafav.setAdapter(adapter);
@@ -130,7 +135,8 @@ public class FavoriteFragment extends Fragment implements IFavorView {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                adapter.filterAlfabetico1();
+                fragmentFavoriteBinding.recyclerfav.scrollToPosition(0);
             }
         });
 
@@ -143,10 +149,14 @@ public class FavoriteFragment extends Fragment implements IFavorView {
     }
 
     @Override
-    public void onFavoritoSuccess(List<Favoritos> favoritos) {adapter.reloadData(favoritos);}
+    public void onFavoritoSuccess(List<Favoritos> favoritos) {
+        adapter.reloadData(favoritos);
+    }
 
     @Override
     public void onFavoritoError(String msg) {
         Toast.makeText(getContext(), "Aún no tiene favoritos", Toast.LENGTH_SHORT).show();
     }
+
+
 }
