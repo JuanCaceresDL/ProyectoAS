@@ -67,7 +67,7 @@
                 android:id="@+id/nombreperfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/constrpar"
+                app:layout_constraintTop_toBottomOf="@id/correoperfil"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
@@ -81,56 +81,37 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
                 android:hint="@string/apellido"/>
-            <EditText
+            <TextView
                 android:id="@+id/correoperfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/apellidoperfil"
+                app:layout_constraintTop_toTopOf="@+id/constrpar"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
                 android:layout_marginEnd="30dp"
                 android:hint="@string/correo"/>
             <EditText
                 android:id="@+id/telefonoperfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/correoperfil"
+                app:layout_constraintTop_toBottomOf="@+id/apellidoperfil"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
                 android:hint="@string/telefono"
                 android:inputType="number" />
-            <EditText
-                android:id="@+id/contraperfil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/telefonoperfil"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:inputType="textPassword"
-                android:hint="@string/contrase_a"/>
-            <EditText
-                android:id="@+id/contraconfperfil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/contraperfil"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:inputType="textPassword"
-                android:hint="@string/contrase_a"/>
             <TextView
                 android:id="@+id/nombreperfilplano"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/constrpar"
+                app:layout_constraintTop_toBottomOf="@id/correoperfil"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="30dp"
                 android:textColor="@color/white"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="40dp"
                 android:textSize="20sp"
-                android:text="@string/nombre_de_perfil"/>
+                android:text="Nombre"/>
             <TextView
                 android:id="@+id/apellidoperfilplano"
                 android:layout_width="wrap_content"
@@ -138,52 +119,51 @@
                 app:layout_constraintTop_toBottomOf="@+id/nombreperfil"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="40dp"
                 android:textSize="20sp"
                 android:textColor="@color/white"
-                android:text="@string/apellido_de_perfil"/>
+                android:text="Apellido"/>
             <TextView
                 android:id="@+id/correoperfilplano"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/apellidoperfil"
+                app:layout_constraintTop_toTopOf="@+id/constrpar"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
                 android:textSize="20sp"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="40dp"
                 android:textColor="@color/white"
-                android:text="@string/correo_de_perfil"/>
+                android:text="Correo"/>
             <TextView
                 android:id="@+id/telefonoperfilplano"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/correoperfil"
+                app:layout_constraintTop_toBottomOf="@+id/apellidoperfil"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
                 android:textSize="20sp"
-                android:layout_marginStart="60dp"
-                android:text="@string/telefono_de_perfil"/>
-            <TextView
-                android:id="@+id/contraperfilplano"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/telefonoperfil"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="40dp"
-                android:layout_marginStart="60dp"
-                android:textSize="20sp"
-                android:text="@string/contrase_a"/>
+                android:layout_marginStart="40dp"
+                android:text="Teléfono"/>
 
             <Button
                 android:id="@+id/editarperf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/contraperfilplano"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/contraperfilplano"
+                app:layout_constraintTop_toBottomOf="@+id/telefonoperfilplano"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/editar"/>
+            <Button
+                android:id="@+id/editarcontra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/telefonoperfil"
+                app:layout_constraintStart_toEndOf="@+id/editarperf"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="25dp"
+                android:text="contraseña"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

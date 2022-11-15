@@ -68,9 +68,12 @@ public class comAdapter extends RecyclerView.Adapter<comAdapter.ViewHolder> {
         TextView comentcom = holder.mComentario;
         comentcom.setText(comentarios.cComentario);
         RatingBar ratinper = holder.mCalificacionp;
+
         if (comentarios.cCalificacion == null){
+            holder.mSinrat.setVisibility(View.VISIBLE);
             ratinper.setRating(0);
         }else {
+            holder.mSinrat.setVisibility(View.GONE);
             ratinper.setRating(comentarios.cCalificacion);
         }
         holder.mId = comentarios.cId;
@@ -128,6 +131,7 @@ public class comAdapter extends RecyclerView.Adapter<comAdapter.ViewHolder> {
 
         private TextView mNombre;
         private TextView mComentario;
+        private TextView mSinrat;
         private RatingBar mCalificacionp;
         public Integer mId, uId;
         public ImageButton basurero;
@@ -138,6 +142,7 @@ public class comAdapter extends RecyclerView.Adapter<comAdapter.ViewHolder> {
             mNombre = itemView.findViewById(R.id.nombreus);
             mComentario = itemView.findViewById(R.id.comentarious);
             mCalificacionp = itemView.findViewById(R.id.ratingp);
+            mSinrat = itemView.findViewById(R.id.sinrating);
             basurero = itemView.findViewById(R.id.trash);
         }
     }

@@ -48,7 +48,7 @@
         android:background="@drawable/ic_baseline_directions_car_24"
         app:layout_constraintTop_toBottomOf="@+id/imagendescr"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"/>
     <ImageButton
         android:id="@+id/google"
@@ -57,6 +57,15 @@
         android:background="@drawable/ic_baseline_map_24"
         app:layout_constraintTop_toBottomOf="@+id/imagendescr"
         app:layout_constraintStart_toEndOf="@+id/waze"
+        app:layout_constraintEnd_toStartOf="@id/visita"
+        android:layout_marginTop="20dp"/>
+    <ImageButton
+        android:id="@+id/visita"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_baseline_calendar_month_24"
+        app:layout_constraintTop_toBottomOf="@+id/imagendescr"
+        app:layout_constraintStart_toEndOf="@+id/google"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"/>
     <TextView

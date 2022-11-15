@@ -26,12 +26,12 @@ public class Detalles extends AppCompatActivity {
         mId = (Integer) bundle.get("idlug");
         System.out.println(mId);
 
-        replaceFragment(new DescriptFragment(mId));
+        replaceFragment(new DescriptFragment(mId,(Boolean) bundle.get("esfavorito")));
         binding.bottomnav2.setOnItemSelectedListener(item -> {
 
             switch (item.getItemId()){
                 case R.id.descripcion:
-                    replaceFragment(new DescriptFragment(mId));
+                    replaceFragment(new DescriptFragment(mId,(Boolean) bundle.get("esfavorito")));
                     break;
                 case R.id.comentarios:
                     replaceFragment(new CommentFragment(mId));

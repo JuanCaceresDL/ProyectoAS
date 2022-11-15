@@ -118,11 +118,11 @@ public class CloseFragment extends Fragment implements ILugarView {
 
         Spinner spinner = closeBinding.filtradoCercano;
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("5");
-        arrayList.add("10");
-        arrayList.add("20");
-        arrayList.add("50");
-        arrayList.add("100");
+        arrayList.add("5 Km");
+        arrayList.add("10 Km");
+        arrayList.add("20 Km");
+        arrayList.add("50 Km");
+        arrayList.add("100 Km");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);

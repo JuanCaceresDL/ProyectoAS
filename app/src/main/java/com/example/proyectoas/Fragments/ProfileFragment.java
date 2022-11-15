@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.example.proyectoas.Adapter.contrAdapter;
 import com.example.proyectoas.Api.ApiClient;
 import com.example.proyectoas.Api.ItemsApi;
 import com.example.proyectoas.Bean.Perfil;
@@ -47,10 +48,12 @@ import retrofit2.Response;
  */
 public class ProfileFragment extends Fragment {
 Integer uId;
-EditText t_nombre, t_apellido, t_email, t_telefono, t_password, t_passwordconf;
-Button b_editar;
+EditText t_nombre, t_apellido, t_telefono;
+TextView t_email;
+Button b_editar, b_contra;
 ImageButton b_cerrar;
-String pnombre,papellido,pcorreo, ptelefono,ppassword,url;
+String pnombre,papellido, ptelefono;
+private contrAdapter contrAdapter;
 
 private ItemsApi api;
 public Perfil perfil;
@@ -100,30 +103,24 @@ public Perfil perfil;
 
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         api = ApiClient.getInstance().create(ItemsApi.class);
+        contrAdapter = new contrAdapter(v.getContext(),uId);
         t_nombre = v.findViewById(R.id.nombreperfil);
         t_apellido = v.findViewById(R.id.apellidoperfil);
         t_email = v.findViewById(R.id.correoperfil);
         t_telefono = v.findViewById(R.id.telefonoperfil);
-        t_password = v.findViewById(R.id.contraperfil);
-        t_passwordconf = v.findViewById(R.id.contraconfperfil);
         b_editar = v.findViewById(R.id.editarperf);
         b_cerrar = v.findViewById(R.id.cerrar);
+        b_contra = v.findViewById(R.id.editarcontra);
 
         Call<Perfil> perfilCall = api.getPerfil(uId);
         perfilCall.enqueue(new Callback<Perfil>() {
             @Override
             public void onResponse(Call<Perfil> call, Response<Perfil> response) {
-                TextView nombre = v.findViewById(R.id.nombreperfilplano);
-                nombre.setText(response.body().uNombre);
+
+
                 t_nombre.setText(response.body().uNombre);
-                TextView apellido = v.findViewById(R.id.apellidoperfilplano);
-                apellido.setText(response.body().uApellido);
                 t_apellido.setText(response.body().uApellido);
-                TextView correo = v.findViewById(R.id.correoperfilplano);
-                correo.setText(response.body().uEmail);
                 t_email.setText(response.body().uEmail);
-                TextView telefono = v.findViewById(R.id.telefonoperfilplano);
-                telefono.setText(response.body().uTelefono);
                 t_telefono.setText(response.body().uTelefono);
             }
 
@@ -132,9 +129,7 @@ public Perfil perfil;
                 System.out.println(t.toString());
             }
         });
-        AwesomeValidation mAwesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        mAwesomeValidation.addValidation(t_passwordconf,t_password, "las contraseñas no son iguales");
-        b_editar.setOnClickListener(view -> editando(mAwesomeValidation.validate()));
+        b_editar.setOnClickListener(view -> editando());
 
         b_cerrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,21 +144,25 @@ public Perfil perfil;
             }
         });
 
+        b_contra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                contrAdapter.showDialog();
+            }
+        });
 
         // Inflate the layout for this fragment
         return v;
     }
 
-    private void editando(boolean validacion){
+    private void editando(){
         Loading loading = new Loading(getActivity());
         loading.showDialog("Editando");
-        if (validacion){
+        if (true){
             pnombre = t_nombre.getText().toString();
             papellido = t_apellido.getText().toString();
-            pcorreo = t_email.getText().toString();
             ptelefono = t_telefono.getText().toString();
-            ppassword = t_password.getText().toString();
-            Call<Perfil> perfilsave = api.getSave(uId,pnombre,papellido,pcorreo,ptelefono,ppassword);
+            Call<Perfil> perfilsave = api.getSave(uId,pnombre,papellido,ptelefono);
             perfilsave.enqueue(new Callback<Perfil>() {
                 @Override
                 public void onResponse(Call<Perfil> call, Response<Perfil> response) {

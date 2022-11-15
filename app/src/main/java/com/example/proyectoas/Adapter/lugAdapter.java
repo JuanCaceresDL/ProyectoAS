@@ -37,6 +37,7 @@ public class lugAdapter extends RecyclerView.Adapter<lugAdapter.ViewHolder> {
     private ILugarView lugarView;
     private IPresenterLugar presenterLugar;
     private String uId;
+    private Boolean esfav;
 
     public lugAdapter(List<Lugares> mLugares, ILugarView lugarView, String uId) {
         this.mLugares = mLugares;
@@ -91,10 +92,16 @@ public class lugAdapter extends RecyclerView.Adapter<lugAdapter.ViewHolder> {
         }else {
             holder.mFavorito.setChecked(true);
         }
+        if (holder.mFavorito.isChecked()){
+           holder.esfav= true;
+        }else {
+            holder.esfav=false;
+        }
         holder.mFavorito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (holder.mFavorito.isChecked()){
+                    holder.esfav = true;
                     presenterLugar.postFavoritos(lugares.rId, Integer.parseInt(uId));
                 }
                 if (!holder.mFavorito.isChecked()){
@@ -104,6 +111,7 @@ public class lugAdapter extends RecyclerView.Adapter<lugAdapter.ViewHolder> {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     presenterLugar.deleteFavoritos(lugares.rId, Integer.parseInt(uId));
+                                    holder.esfav = false;
                                     dialog.dismiss();
                                 }
                             });
@@ -135,10 +143,10 @@ public class lugAdapter extends RecyclerView.Adapter<lugAdapter.ViewHolder> {
         private RatingBar mCalificacion;
         private ToggleButton mFavorito;
         public Integer mId;
+        public Boolean esfav;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             mLugImagen = (ImageView) itemView.findViewById(R.id.tur_image);
             mLugNombre = (TextView) itemView.findViewById(R.id.tur_name);
             mLugDepartamento = (TextView) itemView.findViewById(R.id.tur_departamento);
@@ -151,6 +159,7 @@ public class lugAdapter extends RecyclerView.Adapter<lugAdapter.ViewHolder> {
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), Detalles.class);
             intent.putExtra("idlug", mId);
+            intent.putExtra("esfavorito", esfav);
             view.getContext().startActivity(intent);
         }
     }

@@ -78,7 +78,7 @@ public class cercAdapter extends RecyclerView.Adapter<cercAdapter.ViewHolder> {
         RatingBar lugRatingRatingBar = holder.cCalificacion;
         lugRatingRatingBar.setRating(lugares.rCalificacion);
         TextView lugKiloText = holder.cKilometraje;
-        lugKiloText.setText(String.valueOf(lugares.rDistancia));
+        lugKiloText.setText(new StringBuilder().append(String.valueOf(lugares.rDistancia)).append(" Km").toString());
         ImageView bookImage = holder.cLugImagen;
         holder.mId = lugares.rId;
 

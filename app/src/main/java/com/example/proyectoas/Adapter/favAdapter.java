@@ -40,24 +40,30 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
 
     private List<Favoritos> mFavoritos;
+    private List<Favoritos> mFavoritosoriginal;
     private Context context;
     private IFavorView favorView;
     private IPresenterFav presenterFav;
     private String uId;
+    private Boolean esfav;
 
     public favAdapter(List<Favoritos> mFavoritos, IFavorView favorView, String uId) {
         this.mFavoritos = mFavoritos;
+        this.mFavoritosoriginal = mFavoritos;
         this.favorView = favorView;
         this.presenterFav = new PresenterFav(favorView);
         this.uId = uId;
     }
 
     public void reloadData(List<Favoritos> favoritos) {
-        this.mFavoritos = favoritos;
+        this.mFavoritosoriginal = favoritos;
+        mFavoritos.clear();
+        mFavoritos.addAll(mFavoritosoriginal);
         notifyDataSetChanged();
     }
 
@@ -109,10 +115,16 @@ public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
         }else {
             holder.mFavorito.setChecked(true);
         }
+        if (holder.mFavorito.isChecked()){
+            holder.esfav= true;
+        }else {
+            holder.esfav=false;
+        }
         holder.mFavorito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (holder.mFavorito.isChecked()){
+                    holder.esfav = true;
                     presenterFav.postFavoritos(favoritos.fIdlug, Integer.parseInt(uId));
                 }
                 if (!holder.mFavorito.isChecked()){
@@ -122,8 +134,9 @@ public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     presenterFav.deleteFavoritos(favoritos.fIdlug, Integer.parseInt(uId));
-                                    Toast.makeText(context,"Eliminado de favoritos",Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(context,"Recargue para ver los cambios",Toast.LENGTH_LONG).show();
+                                    holder.esfav = false;
+                                    mFavoritos.remove(holder.getAdapterPosition());
+                                    notifyItemRemoved(holder.getAdapterPosition());
                                     dialog.dismiss();
                                 }
                             });
@@ -156,6 +169,7 @@ public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
         private RatingBar fCalificacion;
         private ToggleButton mFavorito;
         public Integer mId, lId;
+        public Boolean esfav;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -173,6 +187,7 @@ public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), Detalles.class);
             intent.putExtra("idlug", lId);
+            intent.putExtra("esfavorito", esfav);
             view.getContext().startActivity(intent);
         }
     }
@@ -291,6 +306,19 @@ public class favAdapter extends RecyclerView.Adapter<favAdapter.ViewHolder> {
                 return dos.fVisita2.compareTo(uno.fVisita2);
             }
         });
+        notifyDataSetChanged();
+
+    }
+
+    public void filterlugares(String tipo){
+        List<Favoritos> collection;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            collection = mFavoritosoriginal.stream()
+                    .filter(i -> i.fTipo.matches(tipo))
+                    .collect(Collectors.toList());
+            mFavoritos.clear();
+            mFavoritos.addAll(collection);
+        }
         notifyDataSetChanged();
 
     }

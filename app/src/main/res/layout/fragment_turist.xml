@@ -19,6 +19,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclertur"
         android:layout_width="match_parent"
-        android:layout_height="690dp"
-        app:layout_constraintTop_toBottomOf="@id/filtrado_lugar"/>
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/filtrado_lugar"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

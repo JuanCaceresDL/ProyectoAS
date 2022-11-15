@@ -11,6 +11,8 @@ public class Favoritos {
     public String fNombre;
     @SerializedName("idlug")
     public Integer fIdlug;
+    @SerializedName("tipo")
+    public String fTipo;
     @SerializedName("departamento")
     public String fDepartamento;
     @SerializedName("imagen")
@@ -26,10 +28,11 @@ public class Favoritos {
 
     public Favoritos(){}
 
-    public Favoritos(Integer fId, String fNombre, Integer fIdlug ,String fDepartamento, String fImagen, Float fCalificacion, Integer fFavorito, Date fVisita){
+    public Favoritos(Integer fId, String fNombre, Integer fIdlug, String fTipo ,String fDepartamento, String fImagen, Float fCalificacion, Integer fFavorito, Date fVisita){
         this.fId = fId;
         this.fNombre = fNombre;
         this.fIdlug = fIdlug;
+        this.fTipo = fTipo;
         this.fDepartamento = fDepartamento;
         this.fImagen = fImagen;
         this.fCalificacion = fCalificacion;

@@ -45,6 +45,7 @@ public class Login extends AppCompatActivity {
         if (sId != null) {
             Intent intent_home = new Intent(getApplicationContext(),HomeActivity.class);
             startActivity(intent_home);
+            finish();
         }
         AwesomeValidation mAwesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         b_logear.setOnClickListener(view -> logeando(mAwesomeValidation.validate()));
@@ -110,4 +111,5 @@ public class Login extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),Registro.class));
         finish();
     }
+
 }

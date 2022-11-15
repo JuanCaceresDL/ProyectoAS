@@ -91,12 +91,12 @@ public class TuristFragment extends Fragment implements ILugarView {
 
         Spinner spinner = turistBinding.filtradoLugar;
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("A-Z");
-        arrayList.add("Z-A");
+        arrayList.add("Ordenar Alfabéticamente A-Z");
+        arrayList.add("Ordenar Alfabéticamente Z-A");
         arrayList.add("Calificación menor mayor");
         arrayList.add("Calificación mayor menor");
-        arrayList.add("A-Z Departamento");
-        arrayList.add("Z-A Departamento");
+        arrayList.add("Ordenar Alfabéticamente A-Z por Departamento");
+        arrayList.add("Ordenar Alfabéticamente Z-A por Departamento");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);

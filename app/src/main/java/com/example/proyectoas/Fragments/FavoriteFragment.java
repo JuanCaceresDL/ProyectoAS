@@ -95,6 +95,22 @@ public class FavoriteFragment extends Fragment implements IFavorView {
         listafav.setLayoutManager(new LinearLayoutManager(getContext()));
         presenterFav.getFavoritos(uId);
         // Inflate the layout for this fragment
+        fragmentFavoriteBinding.restau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.filterlugares("res");
+                fragmentFavoriteBinding.restau.setEnabled(false);
+                fragmentFavoriteBinding.turi.setEnabled(true);
+            }
+        });
+        fragmentFavoriteBinding.turi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.filterlugares("tur");
+                fragmentFavoriteBinding.turi.setEnabled(false);
+                fragmentFavoriteBinding.restau.setEnabled(true);
+            }
+        });
 
         Spinner spinner = fragmentFavoriteBinding.filtradoFav;
         ArrayList<String> arrayList = new ArrayList<>();

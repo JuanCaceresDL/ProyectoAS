@@ -40,4 +40,7 @@
     <string name="fecha">fecha</string>
     <string name="kilometr">kilometr</string>
     <string name="kilometros_de_distancia">Kilometros de distancia:</string>
+    <string name="nueva_contrase_a">Nueva contraseña</string>
+    <string name="confirmar_nueva_contrase_a">Confirmar nueva contraseña</string>
+    <string name="no_tiene_rating">No tiene rating</string>
 </resources>

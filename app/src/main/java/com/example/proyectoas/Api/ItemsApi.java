@@ -5,6 +5,7 @@ import com.example.proyectoas.Bean.Favoritos;
 import com.example.proyectoas.Bean.Lugares;
 import com.example.proyectoas.Bean.Perfil;
 
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -68,6 +69,14 @@ public interface ItemsApi {
     Call<Perfil> getPerfil(@Field("idus") Integer uId);
 
     @FormUrlEncoded
+    @POST("android/proy2/postVisita.php")
+    Call<String> postVisita(@Field("idus") Integer uId, @Field("idlug") Integer lId, @Field("visita")String visita);
+
+    @FormUrlEncoded
     @POST("android/proy2/saveperf.php")
-    Call<Perfil> getSave(@Field("idus") Integer uId, @Field("nombre") String t_nombre, @Field("apellido") String t_apellido, @Field("correo") String t_email, @Field("telefono") String t_telefono, @Field("contraseña") String t_password);
+    Call<Perfil> getSave(@Field("idus") Integer uId, @Field("nombre") String t_nombre, @Field("apellido") String t_apellido, @Field("telefono") String t_telefono);
+
+    @FormUrlEncoded
+    @POST("android/proy2/savePass.php")
+    Call<String> savePass(@Field("idus") Integer uId, @Field("contraseña") String contra);
 }
